@@ -1,0 +1,120 @@
+package app.calcounter.com.individualproject3;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.MediaPlayer;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
+import com.anychart.chart.common.dataentry.DataEntry;
+import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.charts.Cartesian;
+import com.anychart.charts.Pie;
+import com.anychart.core.ui.table.Column;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class ParentsReport extends AppCompatActivity {
+
+    private SharedPreferences myPrefs;
+    private String userKey;
+    private MediaPlayer mediaPlayer;
+
+    @BindView(R.id.childusernameEditText)EditText childUsernameInput;
+    @BindView(R.id.submitchildusername)Button submit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_parents_report);
+        ButterKnife.bind(this);
+
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.backgroundmusic);
+        mediaPlayer.start();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                userKey = childUsernameInput.getText().toString();
+                myPrefs = getSharedPreferences(userKey,0);
+                //Log.e("currentplay value",userbundle.getString("curplayer"));
+                SharedPreferences.Editor editor = myPrefs.edit();
+
+                int tempscore1 = (myPrefs.getInt("waffle",0));
+                Log.e("value you want", Integer.toString(myPrefs.getInt("waffle",0)));
+                int tempscore2 = (myPrefs.getInt("microbike",0));
+                int tempscore3 = (myPrefs.getInt("stage3score",0));
+
+                int tempscore4 = (myPrefs.getInt("stage4score",0));
+                int tempscore5 = (myPrefs.getInt("stage5score", 0));
+                int tempscore6 = (myPrefs.getInt("stage6score",0));
+
+                Pie pie = AnyChart.pie();
+
+                List<DataEntry> data = new ArrayList<>();
+                data.add(new ValueDataEntry("Stage1",tempscore1));
+                data.add(new ValueDataEntry("Stage2", tempscore2));
+                data.add(new ValueDataEntry( "Stage3", tempscore3));
+                data.add(new ValueDataEntry("Stage4", tempscore4));
+                data.add(new ValueDataEntry("Stage5", tempscore5));
+                data.add(new ValueDataEntry("Stage6", tempscore6));
+
+                pie.data(data);
+
+                AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
+                anyChartView.setChart(pie);
+            }
+        });
+
+        if(userKey !=null)
+        {
+
+
+            //chartList.add(new Chart(resources.getString(R.string.column_chart), ColumnChartActivity.class));
+
+//            Cartesian my = AnyChart.column();
+//            List<DataEntry> data = new ArrayList<>();
+//            data.add(new ValueDataEntry("Stage1", tempscore1));
+//            data.add(new ValueDataEntry("Stage2",tempscore2));
+//            data.add(new ValueDataEntry("Stage3", tempscore3));
+//            data.add(new ValueDataEntry("Stage4", tempscore4));
+//            data.add(new ValueDataEntry("Stage5",tempscore5));
+//            data.add(new ValueDataEntry("Stage6",tempscore6));
+//            my.data(data);
+//            AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
+//            anyChartView.setChart(my);
+
+
+        }
+
+
+
+
+
+
+
+//        Pie pie = AnyChart.pie();
+//
+//        List<DataEntry> data = new ArrayList<>();
+//        data.add(new ValueDataEntry("John",10000));
+//        data.add(new ValueDataEntry("Jake", 12000));
+//        data.add(new ValueDataEntry( "Peter", 18000));
+//
+//        pie.data(data);
+//
+//        AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
+//        anyChartView.setChart(pie);
+    }
+}

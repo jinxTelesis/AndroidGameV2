@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">IndividualProject3</string>
+    <string name="splash_title">JINX STUDIOS</string>
+    <string name="game_title">Math Blaster</string>
+    <string name="loginhint">Enter username</string>
+    <string name="user_password">Enter password</string>
+    <string name="child_btn_login">Child Login</string>
+    <string name="adult_login">Adult Login</string>
+    <string name="reg_text">Registration</string>
+    <string name="reg_title">Register</string>
+    <string name="reg_btn_reg_page">Register</string>
+    <string name="child_pass">Child password</string>
+    <string name="surfs_title">Select Difficulty</string>
+    <string name="easy_dif_title">Kitty Pool</string>
+    <string name="hard_btn_title">Castle Bravo</string>
+    <string name="replay_childscore">Replay Game</string>
+    <string name="exit_child_score">Exit Game</string>
+    <string name="submitbuttnnnn">Submit</string>
+    <string name="enterChildUsername">Enter your child\'s username</string>
+</resources>

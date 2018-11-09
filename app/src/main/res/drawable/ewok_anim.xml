@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+android:oneshot="false">
+<item android:drawable="@drawable/ewok0000" android:duration="40" />
+<item android:drawable="@drawable/ewok0002" android:duration="40" />
+    <item android:drawable="@drawable/ewok0003" android:duration="40" />
+    <item android:drawable="@drawable/ewok0004" android:duration="40" />
+    <item android:drawable="@drawable/ewok0005" android:duration="40" />
+    <item android:drawable="@drawable/ewok0006" android:duration="40" />
+
+
+</animation-list>

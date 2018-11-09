@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/wave_intro_016" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_017" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_018" android:duration="59" />
+
+    <item android:drawable="@drawable/wave_intro_020" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_021" android:duration="34" />
+    <item android:drawable="@drawable/wave_intro_022" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_023" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_024" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_025" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_026" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_027" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_028" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_029" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_030" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_031" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_032" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_033" android:duration="50" />
+    <item android:drawable="@drawable/wave_intro_034" android:duration="50" />
+</animation-list>
