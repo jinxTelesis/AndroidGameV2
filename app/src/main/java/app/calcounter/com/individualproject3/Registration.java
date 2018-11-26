@@ -58,8 +58,8 @@ public class Registration extends AppCompatActivity {
 
     // test button
     //
-    @BindView(R.id.btntest1ID)Button btnTest1Check;
-    @BindView(R.id.btntest2ID)Button btnTest2Submit;
+    //@BindView(R.id.btntest1ID)Button btnTest1Check;
+    //@BindView(R.id.btntest2ID)Button btnTest2Submit;
 
 
 

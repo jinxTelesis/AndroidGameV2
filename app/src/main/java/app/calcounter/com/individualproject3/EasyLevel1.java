@@ -18,13 +18,23 @@ import android.widget.Button;
 import android.view.DragEvent;
 import android.widget.ImageView;
 
+import com.google.firebase.storage.FirebaseStorage;
+
 import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE1;
+
 public class EasyLevel1 extends AppCompatActivity {
+
+
+    // firebase stuff
+    private FirebaseStorage storage;
+
 
     private SharedPreferences myPrefs;
     private MediaPlayer mediaPlayer;
@@ -35,7 +45,6 @@ public class EasyLevel1 extends AppCompatActivity {
     private boolean firstTime3 = true;
     private boolean firstTime4 = true;
     private int playerScore = 0;
-
 
 
     StrtDrgLsntr strtDrgLsntr;
@@ -56,6 +65,11 @@ public class EasyLevel1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_easy_level1);
+
+
+        //firebase
+        storage = FirebaseStorage.getInstance();
 
         // restart intent
 
@@ -65,7 +79,7 @@ public class EasyLevel1 extends AppCompatActivity {
 
         restartIntent = getIntent();
 
-        setContentView(R.layout.activity_easy_level1);
+
         ButterKnife.bind(this);
         fullAnimation = new AnimationSet(true);
 
@@ -128,9 +142,6 @@ public class EasyLevel1 extends AppCompatActivity {
         move5.setStartOffset(24000);
         fullAnimation.addAnimation(move5);
         move5.setFillAfter(true);
-
-
-
 
     }
 
@@ -278,10 +289,10 @@ public class EasyLevel1 extends AppCompatActivity {
                         Intent previous = getIntent();
                         Bundle userbundle = previous.getExtras();
 
-                        myPrefs = getSharedPreferences(userbundle.getString("curplayer"),0);
+                        myPrefs = getSharedPreferences(userbundle.getString(CURRENTPLAYER),0);
                         SharedPreferences.Editor editor = myPrefs.edit();
 
-                        editor.putInt("waffle", playerScore);
+                        editor.putInt(EASYSCORE1, playerScore);
                         editor.apply();
 
 

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,12 +19,46 @@
         <activity android:name=".Registration" />
         <activity android:name=".ParentTest" />
         <activity android:name=".DifSelection" />
+
         <activity
-            android:name=".LoginActivity"
+            android:name=".MediumLevel1"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
         <activity
+            android:name=".MediumLevel2"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".MediumnLevel3"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".InsaneLevel1"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".ParentsReport"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+
+        <activity
+        android:name=".InsaneLevel2"
+        android:configChanges="orientation"
+        android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".InsaneLevel3"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+
+        <activity
             android:name=".HardLevel1"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".EasyLevel1"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
         <activity
@@ -43,10 +77,11 @@
             android:name=".HardLevel3"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
-        <activity android:name=".EasyLevel1" />
-        <activity android:name=".ParentsReport" />
         <activity android:name=".ChildScore" />
-        <activity android:name=".ChildScoreHard"></activity>
+        <activity android:name=".ChildScoreHard" />
+        <activity android:name=".Splash" />
+        <activity android:name=".ChildScoreMedium" />
+        <activity android:name=".ChildScoreInsane"></activity>
     </application>
 
 </manifest>

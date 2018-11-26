@@ -18,8 +18,8 @@ public class DifSelection extends AppCompatActivity {
 
     @BindView(R.id.btnIDEasy) Button btnEasy;
     @BindView(R.id.btnIDHard) Button btnHard;
-
-
+    @BindView(R.id.btnIDMedium) Button btnMedium;
+    @BindView(R.id.btnIDInsane) Button btnInsane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,22 @@ public class DifSelection extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DifSelection.this, EasyLevel1.class);
 
+                ////////
+                ////////
+                Intent previous = getIntent();
+                Bundle userbundle = previous.getExtras();
+                intent.putExtras(userbundle);
+                ////////
+                ////////
+                startActivity(intent);
+                finish();
+            }
+        });
 
+        btnMedium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DifSelection.this, MediumLevel1.class);
 
                 ////////
                 ////////
@@ -47,16 +62,10 @@ public class DifSelection extends AppCompatActivity {
                 ////////
                 startActivity(intent);
                 finish();
-
-
-
-                //myAudio = new AudioClass();
-                //myAudio.audioPlayer(); // need a filename
-
-
-
             }
         });
+
+
 
 
         btnHard.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +82,18 @@ public class DifSelection extends AppCompatActivity {
             }
         });
 
+        btnInsane.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DifSelection.this, InsaneLevel1.class);
 
+                Intent previous = getIntent();
+                Bundle userbundle = previous.getExtras();
+                intent.putExtras(userbundle);
 
-
-
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

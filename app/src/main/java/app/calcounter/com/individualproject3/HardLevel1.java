@@ -21,6 +21,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE1;
+
 public class HardLevel1 extends AppCompatActivity {
 
     private SharedPreferences myPrefs;
@@ -159,8 +162,6 @@ public class HardLevel1 extends AppCompatActivity {
         move9.setFillAfter(true);
         fullAnimation.addAnimation(move9);
 
-
-        //ewok.startAnimation(fullAnimation);
 
     }
 
@@ -351,10 +352,10 @@ public class HardLevel1 extends AppCompatActivity {
                         Intent previous = getIntent();
                         Bundle userbundle = previous.getExtras();
 
-                        myPrefs = getSharedPreferences(userbundle.getString("curplayer"),0);
+                        myPrefs = getSharedPreferences(userbundle.getString(CURRENTPLAYER),0);
                         SharedPreferences.Editor editor = myPrefs.edit();
 
-                        editor.putInt("stage4score", playerScore);
+                        editor.putInt(HARDSCORE1, playerScore);
                         editor.apply();
 
                         Intent intent = new Intent(HardLevel1.this,HardLevel2.class);

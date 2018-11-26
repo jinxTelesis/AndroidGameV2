@@ -16,6 +16,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE3;
+
 public class ChildScore extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
@@ -40,15 +45,15 @@ public class ChildScore extends AppCompatActivity {
         Bundle userbundle = previous.getExtras();
         ButterKnife.bind(this);
 
-        myPrefs = getSharedPreferences(userbundle.getString("curplayer"),0);
+        myPrefs = getSharedPreferences(userbundle.getString(CURRENTPLAYER),0);
         //Log.e("currentplay value",userbundle.getString("curplayer"));
         SharedPreferences.Editor editor = myPrefs.edit();
 
         //Log.e("score value", Integer.toString(myPrefs.getInt("stage1score",0)));
 
-        String tempscore1 = Integer.toString(myPrefs.getInt("waffle",0));
-        String tempscore2 = Integer.toString(myPrefs.getInt("microbike",0));
-        String tempscore3 = Integer.toString(myPrefs.getInt("stage3score",0));
+        String tempscore1 = Integer.toString(myPrefs.getInt(EASYSCORE1,0));
+        String tempscore2 = Integer.toString(myPrefs.getInt(EASYSCORE2,0));
+        String tempscore3 = Integer.toString(myPrefs.getInt(EASYSCORE3,0));
 
         if(tempscore1 != null)
         {

@@ -17,4 +17,8 @@
     <string name="exit_child_score">Exit Game</string>
     <string name="submitbuttnnnn">Submit</string>
     <string name="enterChildUsername">Enter your child\'s username</string>
+    <string name="title_activity_medium_level1">MediumLevel1</string>
+    <string name="title_activity_medium_level2">MediumLevel2</string>
+    <string name="mediumtitle">surfs up</string>
+    <string name="hardTitleResource2">perfect storm</string>
 </resources>

@@ -3,6 +3,8 @@ package app.calcounter.com.individualproject3;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,12 +19,30 @@ import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
 import com.anychart.charts.Pie;
 import com.anychart.core.ui.table.Column;
+import com.anychart.enums.Anchor;
+import com.anychart.enums.HoverMode;
+import com.anychart.enums.Position;
+import com.anychart.enums.TooltipPositionMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE3;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE3;
+import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE3;
+import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE3;
+import static app.calcounter.com.individualproject3.Constants.Constant.THREAD_DELAY;
 
 public class ParentsReport extends AppCompatActivity {
 
@@ -43,6 +63,23 @@ public class ParentsReport extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.backgroundmusic);
         mediaPlayer.start();
 
+        AlertDialog.Builder alertDialogbuild = new AlertDialog.Builder(ParentsReport.this);
+
+        alertDialogbuild.setTitle("Attention");
+        alertDialogbuild.setMessage("Graph might take up to 30 seconds to build").setCancelable(true);
+
+        AlertDialog alertDialog = alertDialogbuild.create();
+
+        alertDialog.show();
+
+        new Handler().postDelayed(() -> {
+
+            alertDialog.dismiss();
+
+        }, THREAD_DELAY);
+
+        // put a notification that it takes a second to calculate
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,69 +89,93 @@ public class ParentsReport extends AppCompatActivity {
                 //Log.e("currentplay value",userbundle.getString("curplayer"));
                 SharedPreferences.Editor editor = myPrefs.edit();
 
-                int tempscore1 = (myPrefs.getInt("waffle",0));
-                Log.e("value you want", Integer.toString(myPrefs.getInt("waffle",0)));
-                int tempscore2 = (myPrefs.getInt("microbike",0));
-                int tempscore3 = (myPrefs.getInt("stage3score",0));
+                childUsernameInput.setVisibility(View.INVISIBLE);
+                submit.setVisibility(View.INVISIBLE);
 
-                int tempscore4 = (myPrefs.getInt("stage4score",0));
-                int tempscore5 = (myPrefs.getInt("stage5score", 0));
-                int tempscore6 = (myPrefs.getInt("stage6score",0));
+                //Log.e("value you want", Integer.toString(myPrefs.getInt("waffle",0)));
 
-                Pie pie = AnyChart.pie();
+                int tempEasyScore1 = (myPrefs.getInt(EASYSCORE1,0));
+                int tempEasyScore2 = (myPrefs.getInt(EASYSCORE2,0));
+                int tempEasyScore3 = (myPrefs.getInt(EASYSCORE3,0));
+
+                int tempMedScore1 = (myPrefs.getInt(MEDSCORE1,0));
+                int tempMedScore2 = (myPrefs.getInt(MEDSCORE2, 0));
+                int tempMedScore3 = (myPrefs.getInt(MEDSCORE3,0));
+
+                int tempHardScore1 = (myPrefs.getInt(HARDSCORE1,0));
+                int tempHardScore2 = (myPrefs.getInt(HARDSCORE2, 0));
+                int tempHardScore3 = (myPrefs.getInt(HARDSCORE3, 0));
+
+                int tempInsaneScore1 = (myPrefs.getInt(INSANESCORE1, 0));
+                int tempInsaneScore2 = (myPrefs.getInt(INSANESCORE2, 0));
+                int tempInsaneScore3 = (myPrefs.getInt(INSANESCORE3, 0));
+
+
+                AnyChartView anyChartView = findViewById(R.id.thatchartapi);
+
+                anyChartView.setProgressBar(findViewById(R.id.progress_bar));
+
+
+
+                Cartesian cartesian = AnyChart.column();
 
                 List<DataEntry> data = new ArrayList<>();
-                data.add(new ValueDataEntry("Stage1",tempscore1));
-                data.add(new ValueDataEntry("Stage2", tempscore2));
-                data.add(new ValueDataEntry( "Stage3", tempscore3));
-                data.add(new ValueDataEntry("Stage4", tempscore4));
-                data.add(new ValueDataEntry("Stage5", tempscore5));
-                data.add(new ValueDataEntry("Stage6", tempscore6));
 
-                pie.data(data);
 
-                AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
-                anyChartView.setChart(pie);
+                data.add(new ValueDataEntry("Easy1", tempEasyScore1));
+                data.add(new ValueDataEntry("Easy2", tempEasyScore2));
+                data.add(new ValueDataEntry("Easy3", tempEasyScore3));
+
+                data.add(new ValueDataEntry("Medium1", tempMedScore1));
+                data.add(new ValueDataEntry("Medium2", tempMedScore2));
+                data.add(new ValueDataEntry("Medium3", tempMedScore3));
+
+                data.add(new ValueDataEntry("Hard1", tempHardScore1));
+                data.add(new ValueDataEntry("Hard2", tempHardScore2));
+                data.add(new ValueDataEntry("Hard3", tempHardScore3));
+
+                data.add(new ValueDataEntry("Insane1", tempInsaneScore1));
+                data.add(new ValueDataEntry("Insane2", tempInsaneScore2));
+                data.add(new ValueDataEntry("Insane3", tempInsaneScore3));
+
+                com.anychart.core.cartesian.series.Column column = cartesian.column(data);
+
+                column.tooltip()
+
+                        .titleFormat("{%X}")
+
+                        .position(Position.CENTER_BOTTOM)
+
+                        .anchor(Anchor.CENTER_BOTTOM)
+
+                        .offsetX(0d)
+
+                        .offsetY(5d)
+
+                        //.format("${%Value}{groupsSeparator: }");
+                        .format("{%Value}{groupsSeparator: }");
+
+
+                cartesian.animation(true);
+
+                cartesian.title("Scores by level");
+
+                cartesian.yScale().minimum(0d);
+
+                //cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
+                cartesian.yAxis(0).labels().format("{%Value}{groupsSeparator: }");
+
+
+                cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
+
+                cartesian.interactivity().hoverMode(HoverMode.BY_X);
+
+                cartesian.xAxis(0).title("Levels");
+
+                cartesian.yAxis(0).title("Scores");
+
+                anyChartView.setChart(cartesian);
             }
         });
-
-        if(userKey !=null)
-        {
-
-
-            //chartList.add(new Chart(resources.getString(R.string.column_chart), ColumnChartActivity.class));
-
-//            Cartesian my = AnyChart.column();
-//            List<DataEntry> data = new ArrayList<>();
-//            data.add(new ValueDataEntry("Stage1", tempscore1));
-//            data.add(new ValueDataEntry("Stage2",tempscore2));
-//            data.add(new ValueDataEntry("Stage3", tempscore3));
-//            data.add(new ValueDataEntry("Stage4", tempscore4));
-//            data.add(new ValueDataEntry("Stage5",tempscore5));
-//            data.add(new ValueDataEntry("Stage6",tempscore6));
-//            my.data(data);
-//            AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
-//            anyChartView.setChart(my);
-
-
-        }
-
-
-
-
-
-
-
-//        Pie pie = AnyChart.pie();
-//
-//        List<DataEntry> data = new ArrayList<>();
-//        data.add(new ValueDataEntry("John",10000));
-//        data.add(new ValueDataEntry("Jake", 12000));
-//        data.add(new ValueDataEntry( "Peter", 18000));
-//
-//        pie.data(data);
-//
-//        AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
-//        anyChartView.setChart(pie);
     }
 }
