@@ -5,16 +5,27 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
 import static app.calcounter.com.individualproject3.RegisterContract.RegistrationEntry.COL_ADULT_FIRST_NAME;
 import static app.calcounter.com.individualproject3.RegisterContract.RegistrationEntry.COL_ADULT_LAST_NAME;
 import static app.calcounter.com.individualproject3.RegisterContract.RegistrationEntry.COL_ADULT_PASSWORD;
@@ -30,15 +41,20 @@ public class LoginActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
+    // test code for firestore
+    private DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("sampleData").document("inspiration");
+
     @BindView(R.id.loginBtnChild) Button cLBtn;
     @BindView(R.id.loginBtnAdult)Button aLBtn;
     @BindView(R.id.regBtnIDLoginAct)Button regBtnLoginAct;
     @BindView(R.id.eTUnLogin)EditText username;
     @BindView(R.id.eTPaLogin2)EditText password;
 
+
     StudentDbHelper mDbHelper;
     private int validChildLogin = 0;
     private int validAdultLogin = 0;
+    public static final String SAVE_STR = Integer.toString(10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.backgroundmusic);
         mediaPlayer.start();
+
 
         cLBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(validChildLogin == 2)
                 {
                     Bundle bundle = new Bundle();
-                    bundle.putString("curplayer", testUsernameStr);
+                    bundle.putString(CURRENTPLAYER, testUsernameStr);
 
                     Intent intent = new Intent(LoginActivity.this, DifSelection.class);
                     intent.putExtras(bundle);
@@ -139,8 +156,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
 
-
-                //ToDO
             }
         });
 
@@ -202,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
                 cursor.close();
 
 
+                // this displays user data
                 Context context = getApplicationContext();
                 CharSequence text = str;
                 int duration = Toast.LENGTH_LONG;
@@ -240,6 +256,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+    }
+
+    // just test code for firestore
+    public void saveQuote(View view)
+    {
+        Map<String,Object> dataToSave = new HashMap<String, Object>();
+        dataToSave.put("quote", SAVE_STR);
+
+        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(SAVE_STR, "Document has been saved!");
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(SAVE_STR,"Docunment was not saveds", e);
+            }
+        });
+
+        // making a document reference
 
     }
 }

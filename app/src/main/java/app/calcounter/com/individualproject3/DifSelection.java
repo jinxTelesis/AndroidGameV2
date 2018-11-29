@@ -85,10 +85,11 @@ public class DifSelection extends AppCompatActivity {
         btnInsane.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DifSelection.this, InsaneLevel1.class);
+
 
                 Intent previous = getIntent();
                 Bundle userbundle = previous.getExtras();
+                Intent intent = new Intent(DifSelection.this, InsaneLevel1.class);
                 intent.putExtras(userbundle);
 
                 startActivity(intent);

@@ -93,10 +93,12 @@ public class ChildScoreMedium extends AppCompatActivity {
     @OnClick(R.id.child_scoreMedium_exitid)
     public void restartLevel(View view)
     {
-        Intent intent = new Intent(ChildScoreMedium.this, DifSelection.class);
         Intent previous = getIntent();
         Bundle userbundle = previous.getExtras();
+        Intent intent = new Intent(ChildScoreMedium.this, DifSelection.class);
         intent.putExtras(userbundle);
+
+
         finish();
         startActivity(intent);
 

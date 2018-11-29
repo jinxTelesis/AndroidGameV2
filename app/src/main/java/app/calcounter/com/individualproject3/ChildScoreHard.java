@@ -14,6 +14,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE3;
 
 public class ChildScoreHard extends AppCompatActivity {
 
@@ -44,9 +47,9 @@ public class ChildScoreHard extends AppCompatActivity {
         myPrefs = getSharedPreferences(userbundle.getString(CURRENTPLAYER),0);
         SharedPreferences.Editor editor = myPrefs.edit();
 
-        score4.setText("stage 4 score: " + myPrefs.getInt("hardscore1",0));
-        score5.setText("stage 5 score: " + myPrefs.getInt("stage5score",0));
-        score6.setText("stage 6 score: " + myPrefs.getInt("stage6score",0));
+        score4.setText("stage 4 score: " + myPrefs.getInt(HARDSCORE1,0));
+        score5.setText("stage 5 score: " + myPrefs.getInt(HARDSCORE2,0));
+        score6.setText("stage 6 score: " + myPrefs.getInt(HARDSCORE3,0));
 
 
     }
@@ -61,10 +64,12 @@ public class ChildScoreHard extends AppCompatActivity {
     @OnClick(R.id.childscorehardReplayID)
     public void restartLevel(View view)
     {
-        Intent intent = new Intent(ChildScoreHard.this, DifSelection.class);
+
         Intent previous = getIntent();
         Bundle userbundle = previous.getExtras();
+        Intent intent = new Intent(ChildScoreHard.this, DifSelection.class);
         intent.putExtras(userbundle);
+
         finish();
         startActivity(intent);
     }

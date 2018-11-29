@@ -19,7 +19,6 @@
         <activity android:name=".Registration" />
         <activity android:name=".ParentTest" />
         <activity android:name=".DifSelection" />
-
         <activity
             android:name=".MediumLevel1"
             android:configChanges="orientation"
@@ -32,27 +31,22 @@
             android:name=".MediumnLevel3"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".InsaneLevel1"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".ParentsReport"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
-
         <activity
-        android:name=".InsaneLevel2"
-        android:configChanges="orientation"
-        android:screenOrientation="landscape" />
-
+            android:name=".InsaneLevel2"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".InsaneLevel3"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".HardLevel1"
             android:configChanges="orientation"
@@ -81,7 +75,8 @@
         <activity android:name=".ChildScoreHard" />
         <activity android:name=".Splash" />
         <activity android:name=".ChildScoreMedium" />
-        <activity android:name=".ChildScoreInsane"></activity>
+        <activity android:name=".ChildScoreInsane" />
+        <activity android:name=".CloudScore"></activity>
     </application>
 
 </manifest>

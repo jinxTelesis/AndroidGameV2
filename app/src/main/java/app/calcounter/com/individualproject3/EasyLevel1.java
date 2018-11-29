@@ -1,5 +1,8 @@
 package app.calcounter.com.individualproject3;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +10,8 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.provider.DocumentsContract;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +23,17 @@ import android.widget.Button;
 import android.view.DragEvent;
 import android.widget.ImageView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,12 +41,22 @@ import butterknife.OnClick;
 
 import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
 import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.TOTALSCORE;
 
 public class EasyLevel1 extends AppCompatActivity {
 
 
+    public static final String IT_WORKED = "It worked!";
+    //public static final String INSPIRING_QUOTE = "InspiringQuote";
     // firebase stuff
-    private FirebaseStorage storage;
+    //private FirebaseStorage storage;
+
+    // always go from document collection document collection
+    // make a player history file and upload all names from there?
+
+    // firebase stuff
+
+
 
 
     private SharedPreferences myPrefs;
@@ -62,14 +85,22 @@ public class EasyLevel1 extends AppCompatActivity {
 
     private Intent restartIntent;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_easy_level1);
 
+        // attempted view model
+
+
+
+
 
         //firebase
-        storage = FirebaseStorage.getInstance();
+        //storage = FirebaseStorage.getInstance();
 
         // restart intent
 
@@ -286,6 +317,17 @@ public class EasyLevel1 extends AppCompatActivity {
                     @Override
                     public void run() {
 
+                        ScoreViewModel actViewModel = ViewModelProviders.of(EasyLevel1.this).get(ScoreViewModel.class);
+                        // these are ViewModel MVVM
+
+                        // this will just product logs for now
+                        //String test = actViewModel.fetchQuote();
+
+
+                        actViewModel.setPlayerTotalScore(playerScore);
+                        actViewModel.saveScore(EASYSCORE1);
+                        // insert function call to firebase save
+
                         Intent previous = getIntent();
                         Bundle userbundle = previous.getExtras();
 
@@ -302,7 +344,7 @@ public class EasyLevel1 extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                },28000L);
+                },30000L);
             }
 
             return true;
@@ -324,6 +366,5 @@ public class EasyLevel1 extends AppCompatActivity {
             super.onDrawShadow(canvas);
         }
     }
-
 
 }

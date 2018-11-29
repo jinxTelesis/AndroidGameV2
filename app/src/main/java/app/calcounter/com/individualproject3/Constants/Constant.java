@@ -17,5 +17,6 @@ public class Constant {
     public static final String HARDSCORE1 = "hardscore1";
     public static final String HARDSCORE2 = "hardscore2";
     public static final String HARDSCORE3 = "hardscore3";
+    public static final String TOTALSCORE = "totalscore";
 
 }

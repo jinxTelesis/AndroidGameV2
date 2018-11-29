@@ -95,9 +95,10 @@ public class ChildScoreInsane extends AppCompatActivity {
     @OnClick(R.id.child_scoreInsane_exitid)
     public void restartLevel(View view)
     {
-        Intent intent = new Intent(ChildScoreInsane.this, DifSelection.class);
+
         Intent previous = getIntent();
         Bundle userbundle = previous.getExtras();
+        Intent intent = new Intent(ChildScoreInsane.this, DifSelection.class);
         intent.putExtras(userbundle);
         finish();
         startActivity(intent);

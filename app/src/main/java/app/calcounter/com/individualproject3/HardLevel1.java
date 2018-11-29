@@ -1,5 +1,6 @@
 package app.calcounter.com.individualproject3;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,8 @@ import butterknife.OnClick;
 
 import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
 import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE1;
+import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE2;
+import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE1;
 
 public class HardLevel1 extends AppCompatActivity {
 
@@ -348,6 +351,10 @@ public class HardLevel1 extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        ScoreViewModel actViewModel = ViewModelProviders.of(HardLevel1.this).get(ScoreViewModel.class);
+                        actViewModel.setPlayerTotalScore(playerScore);
+                        actViewModel.saveScore(HARDSCORE1);
 
                         Intent previous = getIntent();
                         Bundle userbundle = previous.getExtras();

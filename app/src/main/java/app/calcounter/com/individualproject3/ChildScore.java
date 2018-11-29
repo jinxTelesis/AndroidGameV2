@@ -131,14 +131,14 @@ public class ChildScore extends AppCompatActivity {
     @OnClick(R.id.childscoreReplayID)
     public void restartLevel(View view)
     {
-        Intent intent = new Intent(ChildScore.this, DifSelection.class);
+
         Intent previous = getIntent();
         Bundle userbundle = previous.getExtras();
+
+        Intent intent = new Intent(ChildScore.this, DifSelection.class);
         intent.putExtras(userbundle);
         finish();
         startActivity(intent);
-
-
 
     }
 
