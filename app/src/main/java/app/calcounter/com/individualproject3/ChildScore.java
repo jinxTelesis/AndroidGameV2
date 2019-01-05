@@ -21,6 +21,10 @@ import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE
 import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE2;
 import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE3;
 
+/** this activity just reads in scores
+ *
+ */
+
 public class ChildScore extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
@@ -82,43 +86,6 @@ public class ChildScore extends AppCompatActivity {
             score1TV.setText("zero");
         }
 
-
-
-//                topScoreSoFar = myPrefs.getString("TopScore",null);
-//        secondScore = myPrefs.getString("SecondScore", null);
-//        thirdScore = myPrefs.getString("ThirdScore",null);
-//
-//        if(topScoreSoFar != null)
-//        {
-//            tVScore1.setText(topScoreSoFar);
-//        }
-//        else
-//        {
-//            tVScore1.setText("0");
-//        }
-
-
-//        try{
-//            score1TV.setText("stage 1 score: " + Integer.toString(myPrefs.getInt("stage1score",0)));
-//        } catch (Exception e)
-//        {
-//
-//        }
-//
-//        try{
-//            score2TV.setText("stage 2 score: " + Integer.toString(myPrefs.getInt("stage2score",0)));
-//        } catch (Exception e)
-//        {
-//
-//        }
-//
-//        try
-//        {
-//            score2TV.setText("stage 3 score: " + Integer.toString(myPrefs.getInt("stage3score",0)));
-//        } catch(Exception e)
-//        {
-//
-//        }
     }
 
     @OnClick(R.id.child_score_exitid)

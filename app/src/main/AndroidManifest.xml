@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration" />
-        <activity android:name=".ParentTest" />
         <activity android:name=".DifSelection" />
         <activity
             android:name=".MediumLevel1"
@@ -28,7 +27,7 @@
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".MediumnLevel3"
+            android:name=".MediumLevel3"
             android:configChanges="orientation"
             android:screenOrientation="landscape" />
         <activity
@@ -76,7 +75,6 @@
         <activity android:name=".Splash" />
         <activity android:name=".ChildScoreMedium" />
         <activity android:name=".ChildScoreInsane" />
-        <activity android:name=".CloudScore"></activity>
     </application>
 
 </manifest>

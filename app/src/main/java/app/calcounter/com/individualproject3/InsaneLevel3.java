@@ -26,6 +26,20 @@ import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPL
 import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE1;
 import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE3;
 
+/** InsaneLevel3 is the first stage on easy mode it has 7 drag and drop buttons
+ *  if the player drags the correct buttons onto the blank button fields
+ *  then a traversal starts which is stored as an animation set
+ *  the animations are done as a percentage of the screen
+ *  this should be measured in a professional class but was roughly done for
+ *  class work the drag listeners take in the event info to check if the player
+ *  dragged the correct button symbol over
+ *
+ *  if the correct selections are made this activity will pass the score
+ *  to the next activity ChildScoreInsane
+ *
+ *
+ */
+
 public class InsaneLevel3 extends AppCompatActivity {
 
     private SharedPreferences myPrefs;
@@ -83,6 +97,12 @@ public class InsaneLevel3 extends AppCompatActivity {
 
         mediaPlayer = new MediaPlayer();
 
+        // ***********************************************************************
+        // hack solution to get window size does not measure stuff like action bar
+        // break screen down into ratios
+        // seems to scale reasonably to other devices
+        // ***********************************************************************
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -96,7 +116,9 @@ public class InsaneLevel3 extends AppCompatActivity {
         int moveSize6 = (int) (height / 2.6);
         int moveSize7 = (int) (width/5.9); // this needs a long pause then go
         int moveSize8 = (int) (height/4);
-        //int moveSize9 = (int) (width/6);
+
+        //**********************************************
+        // these are the click listeners for the buttons
 
         findViewById(R.id.stage12buttonDownID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage12buttonUpID).setOnLongClickListener(strtDrgLsntr);
@@ -104,6 +126,11 @@ public class InsaneLevel3 extends AppCompatActivity {
         findViewById(R.id.stage12buttonRightID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage12buttonLoopID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage12buttonHaltID).setOnLongClickListener(strtDrgLsntr);
+
+        //***********************************************
+        // drag listeners waiting for the correct button type to be dragged over
+        // will accept the wrong button type which is intended
+        // uses clip data to pass the actual information
 
         findViewById(R.id.stage12button1).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage12button2).setOnDragListener(endDrgLsntr);
@@ -113,6 +140,10 @@ public class InsaneLevel3 extends AppCompatActivity {
         findViewById(R.id.stage12button6).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage12button7).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage12button8).setOnDragListener(endDrgLsntr);
+
+        //***************************************************************
+        // the screen is grid like so one transaltion is done at a time
+        // for the most part
 
         move1 = new TranslateAnimation(0, moveSize1, 0,0);
         move1.setDuration(5000);
@@ -172,19 +203,30 @@ public class InsaneLevel3 extends AppCompatActivity {
         //fullAnimation.addAnimation(move9);
     }
 
+    //*******************************
+    // exit button
+
     @OnClick(R.id.stage12buttonExit)
     public void exitGame(View view)
     {
         this.finishAffinity();
     }
 
+    //**************************************************
     // this button replays level without saving score
+
+
     @OnClick(R.id.stage12buttonReplay)
     public void restartLevel(View view)
     {
         finish();
         startActivity(restartIntent);
     }
+
+    //*************************************************************
+    // drag listeners with the clip data
+    // info sent with the clip data and that also tests
+    // if correct move was made
 
     private class StrtDrgLsntr implements View.OnLongClickListener{
 
@@ -194,6 +236,7 @@ public class InsaneLevel3 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage12buttonDownID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderdown", "down");
                 v.startDrag(data,withShadow,v,0);
 
@@ -201,31 +244,35 @@ public class InsaneLevel3 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage12buttonUpID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderup", "up");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage12buttonRightID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderright","right");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage12buttonLeftID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderleft","left");
-
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage12buttonHaltID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderhalt", "halt");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage12buttonLoopID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderloop","loop");
                 v.startDrag(data,withShadow,v,0);
             }
@@ -234,6 +281,9 @@ public class InsaneLevel3 extends AppCompatActivity {
         }
     }
 
+    //**********************************************************
+    // end of drag listeners determines if the correct button
+    // was dragged over
 
     private class EndDrgLsntr implements View.OnDragListener{
 
@@ -242,11 +292,14 @@ public class InsaneLevel3 extends AppCompatActivity {
             if(event.getAction() == event.ACTION_DROP){
                 v.setBackground(((Button)event.getLocalState()).getBackground());
 
+
                 if(v.getId() == R.id.stage12button1)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("down"))
                     {
                         if(firstTime1) // prevents cheating
@@ -258,11 +311,14 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
 
+
                 if(v.getId() == R.id.stage12button2)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("right"))
                     {
                         if(firstTime2) // prevents cheating
@@ -274,11 +330,14 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
 
+
                 if(v.getId() == R.id.stage12button3)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("up"))
                     {
                         if(firstTime3) // prevents cheating
@@ -290,11 +349,14 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
 
+
                 if(v.getId() == R.id.stage12button4)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("right"))
                     {
                         if(firstTime4) // prevents cheating
@@ -306,11 +368,14 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
 
+
                 if(v.getId() == R.id.stage12button5)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("down"))
                     {
                         if(firstTime5) // prevents cheating
@@ -322,11 +387,14 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
 
+
                 if(v.getId() == R.id.stage12button6)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("right"))
                     {
                         if(firstTime6) // prevents cheating
@@ -338,11 +406,14 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
 
+
                 if(v.getId() == R.id.stage12button7)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("down"))
                     {
                         if(firstTime7) // prevents cheating
@@ -354,6 +425,10 @@ public class InsaneLevel3 extends AppCompatActivity {
                     }
                 }
             }
+
+            // **************************************************************************
+            // if the player picked all the correct values the next activity is started
+            // and the score data is passed in
 
             if(startAnimationCounter == 7)
             {

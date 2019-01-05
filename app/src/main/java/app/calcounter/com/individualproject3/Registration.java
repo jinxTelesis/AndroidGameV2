@@ -32,9 +32,13 @@ import static app.calcounter.com.individualproject3.RegisterContract.Registratio
 import static app.calcounter.com.individualproject3.RegisterContract.TABLE_NAME;
 
 
-// this view makes sure data has valid entries
-// lights up in red if not
-// also will catch the Exceptions here rather than propagating them up
+/** Registration class fills in the attributes from
+ *  a number of text fields validation is removed
+ *  from previous projects uses sqlite
+ *  not a huge fan rather shared preferences or cloud storage
+ *
+ *
+ */
 
 public class Registration extends AppCompatActivity {
 
@@ -319,6 +323,9 @@ public class Registration extends AppCompatActivity {
     }
 
 
+    //*****************************
+    // submitRecord creates and instance of dbHelper then puts the values from the various text fields
+    // it is called from within the listener above
 
 
     public void submitRecord()

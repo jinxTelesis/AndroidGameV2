@@ -18,6 +18,10 @@ import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCO
 import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE2;
 import static app.calcounter.com.individualproject3.Constants.Constant.INSANESCORE3;
 
+/** this activity just reads in scores
+ *
+ */
+
 public class ChildScoreInsane extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;

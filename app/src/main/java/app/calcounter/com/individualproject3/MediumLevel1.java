@@ -30,11 +30,23 @@ import static app.calcounter.com.individualproject3.Constants.Constant.THREAD_DE
 
 public class MediumLevel1 extends AppCompatActivity {
 
-    private SharedPreferences myPrefs;
-    private MediaPlayer mediaPlayer;
+    /** this is a level that uses drag n drop like the others
+     *  if the player chooses the correct systems that match the course
+     *  then AnimationSet is started and the score is updated and sent to the next
+     *  activity MediumLevel2
+     *
+     *  movement of the translation is roughly calculated by screen size
+     *  hack solution because this was a homework with limited time to solve
+     *
+     *  event drag listeners wait for the correct button to be dragon onto them
+     *
+     */
+
+    private SharedPreferences myPrefs; // for the players score
+    private MediaPlayer mediaPlayer; // music
 
     private int startAnimationCounter = 0;
-    private boolean firstTime1 = true;
+    private boolean firstTime1 = true; // prevent score incrementation with repeated
     private boolean firstTime2 = true;
     private boolean firstTime3 = true;
     private boolean firstTime4 = true;
@@ -50,7 +62,7 @@ public class MediumLevel1 extends AppCompatActivity {
 
     private AnimationSet fullAnimation;
 
-    private TranslateAnimation move1;
+    private TranslateAnimation move1; // each of the translated animations in the set
     private TranslateAnimation move2;
     private TranslateAnimation move3;
     private TranslateAnimation move4;
@@ -90,6 +102,12 @@ public class MediumLevel1 extends AppCompatActivity {
 
 
 
+        // ***********************************************************************
+        // hack solution to get window size does not measure stuff like action bar
+        // break screen down into ratios
+        // seems to scale reasonably to other devices
+        // ***********************************************************************
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -124,10 +142,18 @@ public class MediumLevel1 extends AppCompatActivity {
         strtDrgLsntr = new StrtDrgLsntr();
         endDrgLsntr = new EndDrgLsntr();
 
+        //**********************************************
+        // these are the click listeners for the buttons
+
         findViewById(R.id.stage7buttonRightID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage7buttonLeftID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage7buttonDownID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage7buttonUpID).setOnLongClickListener(strtDrgLsntr);
+
+        //***********************************************
+        // drag listeners waiting for the correct button type to be dragged over
+        // will accept the wrong button type which is intended
+        // uses clip data to pass the actual information
 
         findViewById(R.id.stage7button1).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage7button2).setOnDragListener(endDrgLsntr);
@@ -135,6 +161,10 @@ public class MediumLevel1 extends AppCompatActivity {
         findViewById(R.id.stage7button4).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage7button5).setOnDragListener(endDrgLsntr);
 
+
+        //***************************************************************
+        // the screen is grid like so one transaltion is done at a time
+        // for the most part
         move1 = new TranslateAnimation(0, moveSize1, 0,0);
         move1.setDuration(5000);
         move1.setFillAfter(true);
@@ -218,13 +248,19 @@ public class MediumLevel1 extends AppCompatActivity {
     }
 
 
+    //*******************************
+    // exit button
+
+
     @OnClick(R.id.stage7buttonExit)
     public void exitGame(View view)
     {
         this.finishAffinity();
     }
 
+    //**************************************************
     // this button replays level without saving score
+
     @OnClick(R.id.stage7buttonReplay)
     public void restartLevel(View view)
     {
@@ -232,6 +268,8 @@ public class MediumLevel1 extends AppCompatActivity {
         startActivity(restartIntent);
     }
 
+    //*************************************************************
+    // drag listeners with the clip data
 
     private class StrtDrgLsntr implements View.OnLongClickListener{
 
@@ -242,6 +280,7 @@ public class MediumLevel1 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage7buttonDownID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderdown", "down");
                 v.startDrag(data,withShadow,v,0);
 
@@ -249,18 +288,21 @@ public class MediumLevel1 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage7buttonUpID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderup", "up");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage7buttonRightID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderright","right");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage7buttonLeftID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderleft","left");
 
                 v.startDrag(data,withShadow,v,0);
@@ -273,6 +315,9 @@ public class MediumLevel1 extends AppCompatActivity {
         }
     }
 
+    //**********************************************************
+    // end of drag listeners determines if the correct button
+    // was dragged over
 
     private class EndDrgLsntr implements View.OnDragListener{
 
@@ -284,11 +329,14 @@ public class MediumLevel1 extends AppCompatActivity {
 
                 if (v.getId() == R.id.stage7button1) {
                     ClipData s = event.getClipData();
+                    // this is storing the actual clip data
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if (s1.equals("down")) {
                         if (firstTime1) // prevents cheating
                         {
+                            // score values
                             ++startAnimationCounter;
                             firstTime1 = false;
                             playerScore += 25;
@@ -300,8 +348,10 @@ public class MediumLevel1 extends AppCompatActivity {
 
                 if (v.getId() == R.id.stage7button2) {
                     ClipData s = event.getClipData();
+                    // this is storing the actual clip data
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if (s1.equals("right")) {
                         if (firstTime2) // prevents cheating
                         {
@@ -314,8 +364,10 @@ public class MediumLevel1 extends AppCompatActivity {
 
                 if (v.getId() == R.id.stage7button3) {
                     ClipData s = event.getClipData();
+                    // this is storing the actual clip data
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if (s1.equals("up")) {
                         if (firstTime3) // prevents cheating
                         {
@@ -328,8 +380,10 @@ public class MediumLevel1 extends AppCompatActivity {
 
                 if (v.getId() == R.id.stage7button4) {
                     ClipData s = event.getClipData();
+                    // test if it is the correct button
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if (s1.equals("left")) {
                         if (firstTime4) // prevents cheating
                         {
@@ -342,8 +396,11 @@ public class MediumLevel1 extends AppCompatActivity {
 
                 if (v.getId() == R.id.stage7button5) {
                     ClipData s = event.getClipData();
+
+                    // test if it is the correct button
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if (s1.equals("down")) {
                         if (firstTime5) // prevents cheating
                         {
@@ -355,6 +412,10 @@ public class MediumLevel1 extends AppCompatActivity {
                 }
 
             }
+
+            // **************************************************************************
+            // if the player picked all the correct values the next activity is started
+            // and the score data is passed in
 
             if(startAnimationCounter == 5)
             {

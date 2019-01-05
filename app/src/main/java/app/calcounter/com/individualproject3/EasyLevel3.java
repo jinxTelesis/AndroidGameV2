@@ -26,6 +26,20 @@ import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPL
 import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE2;
 import static app.calcounter.com.individualproject3.Constants.Constant.EASYSCORE3;
 
+/** EasyLevel3 is the second stage on easy mode it has 4 drag and drop buttons
+ *  if the player drags the correct buttons onto the blank button fields
+ *  then a traversal starts which is stored as an animation set
+ *  the animations are done as a percentage of the screen
+ *  this should be measured in a professional class but was roughly done for
+ *  class work the drag listeners take in the event info to check if the player
+ *  dragged the correct button symbol over
+ *
+ *  if the correct selections are made this activity will pass the score
+ *  to the next activity EasyLevel3
+ *
+ *
+ */
+
 public class EasyLevel3 extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
@@ -73,6 +87,12 @@ public class EasyLevel3 extends AppCompatActivity {
         fullAnimation = new AnimationSet(true);
         restartIntent = getIntent();
 
+        // ***********************************************************************
+        // hack solution to get window size does not measure stuff like action bar
+        // break screen down into ratios
+        // seems to scale reasonably to other devices
+        // ***********************************************************************
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -84,10 +104,18 @@ public class EasyLevel3 extends AppCompatActivity {
         int moveSize4 = -1*(int) (width / 1.2);
         int moveSize5 = (int) (height / 2.85);
 
+        //**********************************************
+        // these are the click listeners for the buttons
+
         findViewById(R.id.stage3buttonDownID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage3buttonUpID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage3buttonRightID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage3buttonLeftID).setOnLongClickListener(strtDrgLsntr);
+
+        //***********************************************
+        // drag listeners waiting for the correct button type to be dragged over
+        // will accept the wrong button type which is intended
+        // uses clip data to pass the actual information
 
         findViewById(R.id.stage3button1).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage3button2).setOnDragListener(endDrgLsntr);
@@ -99,7 +127,6 @@ public class EasyLevel3 extends AppCompatActivity {
         move1.setFillAfter(true);
         fullAnimation.addAnimation(move1);
 
-        // reverse of other
         move2 = new TranslateAnimation(0,moveSize2,0, 0);
         move2.setDuration(5000);
         move2.setFillAfter(true);
@@ -128,19 +155,29 @@ public class EasyLevel3 extends AppCompatActivity {
 
     }
 
+    //*******************************
+    // exit button
+
     @OnClick(R.id.stage3buttonExit)
     public void exitGame(View view)
     {
         this.finishAffinity();
     }
 
+    //**************************************************
     // this button replays level without saving score
+
     @OnClick(R.id.stage3buttonReplay)
     public void restartLevel(View view)
     {
         finish();
         startActivity(restartIntent);
     }
+
+    //*************************************************************
+    // drag listeners with the clip data
+    // info sent with the clip data and that also tests
+    // if correct move was made
 
 
     private class StrtDrgLsntr implements View.OnLongClickListener{
@@ -153,27 +190,29 @@ public class EasyLevel3 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage3buttonDownID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderdown", "down");
                 v.startDrag(data,withShadow,v,0);
-
             }
 
             if(v.getId() == R.id.stage3buttonUpID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderup", "up");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage3buttonRightID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderright","right");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage3buttonLeftID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderleft","left");
-
                 v.startDrag(data,withShadow,v,0);
             }
 
@@ -181,6 +220,9 @@ public class EasyLevel3 extends AppCompatActivity {
         }
     }
 
+    //**********************************************************
+    // end of drag listeners determines if the correct button
+    // was dragged over
 
     private class EndDrgLsntr implements View.OnDragListener{
 
@@ -188,11 +230,14 @@ public class EasyLevel3 extends AppCompatActivity {
         public boolean onDrag(View v, DragEvent event) {
             if(event.getAction() == event.ACTION_DROP){
                 v.setBackground(((Button)event.getLocalState()).getBackground());
+
                 if(v.getId() == R.id.stage3button1)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("right"))
                     {
                         if(firstTime1) // prevents cheating
@@ -208,9 +253,11 @@ public class EasyLevel3 extends AppCompatActivity {
 
                 if(v.getId() == R.id.stage3button2)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("up"))
                     {
                         if(firstTime2) // prevents cheating
@@ -224,9 +271,11 @@ public class EasyLevel3 extends AppCompatActivity {
 
                 if(v.getId() == R.id.stage3button3)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("left"))
                     {
                         if(firstTime3) // prevents cheating
@@ -240,9 +289,11 @@ public class EasyLevel3 extends AppCompatActivity {
 
                 if(v.getId() == R.id.stage3button4)
                 {
+                    // this is storing the actual clip data
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
+                    // test if it is the correct button
                     if(s1.equals("down"))
                     {
                         if(firstTime4) // prevents cheating
@@ -254,6 +305,10 @@ public class EasyLevel3 extends AppCompatActivity {
                     }
                 }
             }
+
+            // **************************************************************************
+            // if the player picked all the correct values the next activity is started
+            // and the score data is passed in
 
             if(startAnimationCounter == 4)
             {

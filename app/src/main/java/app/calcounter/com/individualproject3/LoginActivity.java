@@ -37,11 +37,17 @@ import static app.calcounter.com.individualproject3.RegisterContract.Registratio
 import static app.calcounter.com.individualproject3.RegisterContract.RegistrationEntry.COL_EMAILADDRESS;
 import static app.calcounter.com.individualproject3.RegisterContract.TABLE_NAME;
 
+/** LoginActivity checks if the user name and password are in the list
+ *  of attributes in sqlite, I wouldn't write a login like this i would use firebase
+ *  or something else. But we had to use sqlite for class
+ *
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
 
-    // test code for firestore
+
     private DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("sampleData").document("inspiration");
 
     @BindView(R.id.loginBtnChild) Button cLBtn;
@@ -89,6 +95,10 @@ public class LoginActivity extends AppCompatActivity {
                 testUsernameStr = username.getText().toString();
                 testPasswordStr = password.getText().toString();
 
+                // where it reads in the attributes
+                // if the attributes match a valid login it increments the values for a valid login
+                // if the value equals two later it allows the login to occur
+
                 while(cursor.moveToNext())
                 {
                     str+= cursor.getString(cursor.getColumnIndexOrThrow(COL_ADULT_FIRST_NAME)) + "\t\t";
@@ -133,6 +143,12 @@ public class LoginActivity extends AppCompatActivity {
                 // change that red
                 Toast toast = Toast.makeText(context,text,duration);
                 toast.show();
+
+                /**********************************
+                 * if both values entered in are valid usersname and pass
+                 * lets user access DifSelection activity
+                 */
+
 
                 if(validChildLogin == 2)
                 {
@@ -224,6 +240,11 @@ public class LoginActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context,text,duration);
                 toast.show();
 
+                /**********************************
+                 * if both values entered in are valid usersname and pass
+                 * lets user access DifSelection activity
+                 */
+
                 if(validAdultLogin == 2)
                 {
 
@@ -262,6 +283,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // just test code for firestore
+    // this code is not used
+    // left in intentionally for teacher
+
     public void saveQuote(View view)
     {
         Map<String,Object> dataToSave = new HashMap<String, Object>();

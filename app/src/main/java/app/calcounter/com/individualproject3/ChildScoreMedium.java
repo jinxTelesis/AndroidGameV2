@@ -18,6 +18,10 @@ import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE1
 import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE2;
 import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE3;
 
+/** this activity just reads in scores
+ *
+ */
+
 public class ChildScoreMedium extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;

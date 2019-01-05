@@ -3,6 +3,9 @@ package app.calcounter.com.individualproject3;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+// not used
+// excuse my bad habit
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

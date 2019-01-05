@@ -46,6 +46,14 @@ import static app.calcounter.com.individualproject3.Constants.Constant.THREAD_DE
 
 public class ParentsReport extends AppCompatActivity {
 
+    /** ParentsReport activity displays a bar graph with each bar
+     *  derived from a child score file
+     *  this activity uses the anycharts API
+     *  starts with an alert dialog telling user about waiting time
+     *
+     *
+     */
+
     private SharedPreferences myPrefs;
     private String userKey;
     private MediaPlayer mediaPlayer;
@@ -62,6 +70,9 @@ public class ParentsReport extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.backgroundmusic);
         mediaPlayer.start();
+
+        // **********************************************************
+        // alert dialog tells user graph might not appear right away
 
         AlertDialog.Builder alertDialogbuild = new AlertDialog.Builder(ParentsReport.this);
 
@@ -94,6 +105,10 @@ public class ParentsReport extends AppCompatActivity {
 
                 //Log.e("value you want", Integer.toString(myPrefs.getInt("waffle",0)));
 
+                //*****************************************************************
+                // the next few lines of code retrieve the shared preferences data
+                // into variables
+
                 int tempEasyScore1 = (myPrefs.getInt(EASYSCORE1,0));
                 int tempEasyScore2 = (myPrefs.getInt(EASYSCORE2,0));
                 int tempEasyScore3 = (myPrefs.getInt(EASYSCORE3,0));
@@ -111,16 +126,17 @@ public class ParentsReport extends AppCompatActivity {
                 int tempInsaneScore3 = (myPrefs.getInt(INSANESCORE3, 0));
 
 
+                // these are both in the xml used by anychart api
                 AnyChartView anyChartView = findViewById(R.id.thatchartapi);
-
                 anyChartView.setProgressBar(findViewById(R.id.progress_bar));
-
-
 
                 Cartesian cartesian = AnyChart.column();
 
                 List<DataEntry> data = new ArrayList<>();
 
+
+                // *******************************
+                //loads data values into anychart
 
                 data.add(new ValueDataEntry("Easy1", tempEasyScore1));
                 data.add(new ValueDataEntry("Easy2", tempEasyScore2));
@@ -170,8 +186,10 @@ public class ParentsReport extends AppCompatActivity {
 
                 cartesian.interactivity().hoverMode(HoverMode.BY_X);
 
+                // sets x axis levels
                 cartesian.xAxis(0).title("Levels");
 
+                // sets y axis levels
                 cartesian.yAxis(0).title("Scores");
 
                 anyChartView.setChart(cartesian);

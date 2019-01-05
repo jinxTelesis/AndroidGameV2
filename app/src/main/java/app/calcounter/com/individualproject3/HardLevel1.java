@@ -24,8 +24,20 @@ import butterknife.OnClick;
 
 import static app.calcounter.com.individualproject3.Constants.Constant.CURRENTPLAYER;
 import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE1;
-import static app.calcounter.com.individualproject3.Constants.Constant.HARDSCORE2;
-import static app.calcounter.com.individualproject3.Constants.Constant.MEDSCORE1;
+
+/** HardLevel1 is the first stage on Hard mode it has 6 drag and drop buttons
+ *  if the player drags the correct buttons onto the blank button fields
+ *  then a traversal starts which is stored as an animation set
+ *  the animations are done as a percentage of the screen
+ *  this should be measured in a professional class but was roughly done for
+ *  class work the drag listeners take in the event info to check if the player
+ *  dragged the correct button symbol over
+ *
+ *  if the correct selections are made this activity will pass the score
+ *  to the next activity HardLevel2
+ *
+ *
+ */
 
 public class HardLevel1 extends AppCompatActivity {
 
@@ -80,6 +92,12 @@ public class HardLevel1 extends AppCompatActivity {
         fullAnimation = new AnimationSet(true);
         restartIntent = getIntent();
 
+        // ***********************************************************************
+        // hack solution to get window size does not measure stuff like action bar
+        // break screen down into ratios
+        // seems to scale reasonably to other devices
+        // ***********************************************************************
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -93,6 +111,9 @@ public class HardLevel1 extends AppCompatActivity {
         int moveSize6 = (int) (height / 3.2);
         int moveSize7 = -1*(int) (width/4.5);
 
+        //**********************************************
+        // these are the click listeners for the buttons
+
 
         findViewById(R.id.stage4buttonDownID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage4buttonUpID).setOnLongClickListener(strtDrgLsntr);
@@ -101,12 +122,21 @@ public class HardLevel1 extends AppCompatActivity {
         findViewById(R.id.stage4buttonHaltID).setOnLongClickListener(strtDrgLsntr);
         findViewById(R.id.stage4buttonLoopID).setOnLongClickListener(strtDrgLsntr);
 
+        //***********************************************
+        // drag listeners waiting for the correct button type to be dragged over
+        // will accept the wrong button type which is intended
+        // uses clip data to pass the actual information
+
         findViewById(R.id.stage4button1).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage4button2).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage4button3).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage4button4).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage4button5).setOnDragListener(endDrgLsntr);
         findViewById(R.id.stage4button6).setOnDragListener(endDrgLsntr);
+
+        //***************************************************************
+        // the screen is grid like so one transaltion is done at a time
+        // for the most part
 
         move1 = new TranslateAnimation(0, moveSize1, 0,0);
         move1.setDuration(5000);
@@ -168,13 +198,19 @@ public class HardLevel1 extends AppCompatActivity {
 
     }
 
+    //*******************************
+    // exit button
+
     @OnClick(R.id.stage4buttonExit)
     public void exitGame(View view)
     {
         this.finishAffinity();
     }
 
+    //**************************************************
     // this button replays level without saving score
+
+
     @OnClick(R.id.stage4buttonReplay)
     public void restartLevel(View view)
     {
@@ -183,6 +219,10 @@ public class HardLevel1 extends AppCompatActivity {
     }
 
 
+    //*************************************************************
+    // drag listeners with the clip data
+    // info sent with the clip data and that also tests
+    // if correct move was made
 
 
     private class StrtDrgLsntr implements View.OnLongClickListener{
@@ -194,6 +234,7 @@ public class HardLevel1 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage4buttonDownID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderdown", "down");
                 v.startDrag(data,withShadow,v,0);
 
@@ -201,31 +242,35 @@ public class HardLevel1 extends AppCompatActivity {
 
             if(v.getId() == R.id.stage4buttonUpID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderup", "up");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage4buttonRightID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderright","right");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage4buttonLeftID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderleft","left");
-
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage4buttonHaltID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderhalt", "halt");
                 v.startDrag(data,withShadow,v,0);
             }
 
             if(v.getId() == R.id.stage4buttonLoopID)
             {
+                // this is the specific clip data
                 ClipData data = ClipData.newPlainText("senderloop","loop");
                 v.startDrag(data,withShadow,v,0);
             }
@@ -234,6 +279,9 @@ public class HardLevel1 extends AppCompatActivity {
         }
     }
 
+    //**********************************************************
+    // end of drag listeners determines if the correct button
+    // was dragged over
 
     private class EndDrgLsntr implements View.OnDragListener{
 
@@ -242,8 +290,10 @@ public class HardLevel1 extends AppCompatActivity {
             if(event.getAction() == event.ACTION_DROP){
                 v.setBackground(((Button)event.getLocalState()).getBackground());
 
+                // this is storing the actual clip data
                 if(v.getId() == R.id.stage4button1)
                 {
+                    // test if it is the correct button
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
@@ -260,8 +310,10 @@ public class HardLevel1 extends AppCompatActivity {
                 }
 
 
+                // this is storing the actual clip data
                 if(v.getId() == R.id.stage4button2)
                 {
+                    // test if it is the correct button
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
@@ -276,8 +328,10 @@ public class HardLevel1 extends AppCompatActivity {
                     }
                 }
 
+                // this is storing the actual clip data
                 if(v.getId() == R.id.stage4button3)
                 {
+                    // test if it is the correct button
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
@@ -292,8 +346,10 @@ public class HardLevel1 extends AppCompatActivity {
                     }
                 }
 
+                // this is storing the actual clip data
                 if(v.getId() == R.id.stage4button4)
                 {
+                    // test if it is the correct button
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
@@ -308,8 +364,10 @@ public class HardLevel1 extends AppCompatActivity {
                     }
                 }
 
+                // this is storing the actual clip data
                 if(v.getId() == R.id.stage4button5)
                 {
+                    // test if it is the correct button
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
@@ -324,8 +382,10 @@ public class HardLevel1 extends AppCompatActivity {
                     }
                 }
 
+                // this is storing the actual clip data
                 if(v.getId() == R.id.stage4button6)
                 {
+                    // test if it is the correct button
                     ClipData s = event.getClipData();
                     String s1 = (String) s.getItemAt(0).getText();
 
@@ -339,9 +399,11 @@ public class HardLevel1 extends AppCompatActivity {
                         }
                     }
                 }
-
-
             }
+
+            // **************************************************************************
+            // if the player picked all the correct values the next activity is started
+            // and the score data is passed in
 
             if(startAnimationCounter == 6)
             {
