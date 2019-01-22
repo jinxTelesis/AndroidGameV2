@@ -1,8 +1,6 @@
 package app.calcounter.com.individualproject3;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,17 +21,6 @@ import android.widget.Button;
 import android.view.DragEvent;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.storage.FirebaseStorage;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -348,15 +335,15 @@ public class EasyLevel1 extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        ScoreViewModel actViewModel = ViewModelProviders.of(EasyLevel1.this).get(ScoreViewModel.class);
+                        //ScoreViewModel actViewModel = ViewModelProviders.of(EasyLevel1.this).get(ScoreViewModel.class);
                         // these are ViewModel MVVM
 
                         // this will just product logs for now
                         //String test = actViewModel.fetchQuote();
 
 
-                        actViewModel.setPlayerTotalScore(playerScore);
-                        actViewModel.saveScore(EASYSCORE1);
+                        //actViewModel.setPlayerTotalScore(playerScore);
+                        //actViewModel.saveScore(EASYSCORE1);
                         // insert function call to firebase save
 
                         Intent previous = getIntent();

@@ -14,10 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
 
 
-    private DocumentReference mDocRef = FirebaseFirestore.getInstance().collection("sampleData").document("inspiration");
+
 
     @BindView(R.id.loginBtnChild) Button cLBtn;
     @BindView(R.id.loginBtnAdult)Button aLBtn;
@@ -279,33 +276,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
-    }
-
-    // just test code for firestore
-    // this code is not used
-    // left in intentionally for teacher
-
-    public void saveQuote(View view)
-    {
-        Map<String,Object> dataToSave = new HashMap<String, Object>();
-        dataToSave.put("quote", SAVE_STR);
-
-        mDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(SAVE_STR, "Document has been saved!");
-
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(SAVE_STR,"Docunment was not saveds", e);
-            }
-        });
-
-        // making a document reference
 
     }
 }

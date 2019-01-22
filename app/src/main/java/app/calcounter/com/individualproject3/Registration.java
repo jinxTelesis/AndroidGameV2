@@ -99,11 +99,45 @@ public class Registration extends AppCompatActivity {
         /////////////////////////////////////////////////
         mDbHelper = new StudentDbHelper(this);
 
+        meTAFN.setOnFocusChangeListener((v,c)->{
+            meTAFN.setTextColor(Color.BLACK);
+            meTAFN.setText("");
+        });
 
+        meTALN.setOnFocusChangeListener((v,c)->{
+            meTALN.setTextColor(Color.BLACK);
+            meTALN.setText("");
+        });
 
+        meTDOB.setOnFocusChangeListener((v,c)->{
+            meTDOB.setTextColor(Color.BLACK);
+            meTDOB.setText("");
+        });
 
+        meTEm.setOnFocusChangeListener((v,c)->{
+            meTEm.setTextColor(Color.BLACK);
+            meTEm.setText("");
+        });
 
+        meTAUN.setOnFocusChangeListener((v,c)->{
+            meTAUN.setTextColor(Color.BLACK);
+            meTAUN.setText("");
+        });
 
+        meTAP.setOnFocusChangeListener((v,c)->{
+            meTAP.setTextColor(Color.BLACK);
+            meTAP.setText("");
+        });
+
+        meCFN.setOnFocusChangeListener((v,c)->{
+            meCFN.setTextColor(Color.BLACK);
+            meCFN.setText("");
+        });
+
+        meTCUN.setOnFocusChangeListener((v,c)->{
+            meTCUN.setTextColor(Color.BLACK);
+            meTCUN.setText("");
+        });
 
         mregBtn.setOnClickListener(new View.OnClickListener() {
             @Override

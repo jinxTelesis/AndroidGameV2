@@ -1,6 +1,6 @@
 package app.calcounter.com.individualproject3;
 
-import android.arch.lifecycle.ViewModelProviders;
+//import android.arch.lifecycle.ViewModelProviders;
 import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -319,9 +319,9 @@ public class EasyLevel3 extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        ScoreViewModel actViewModel = ViewModelProviders.of(EasyLevel3.this).get(ScoreViewModel.class);
-                        actViewModel.setPlayerTotalScore(playerScore);
-                        actViewModel.saveScore(EASYSCORE3);
+                        //ScoreViewModel actViewModel = ViewModelProviders.of(EasyLevel3.this).get(ScoreViewModel.class);
+                        //actViewModel.setPlayerTotalScore(playerScore);
+                        //actViewModel.saveScore(EASYSCORE3);
                         Intent previous = getIntent();
                         Bundle userbundle = previous.getExtras();
 
