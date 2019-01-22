@@ -99,6 +99,8 @@ public class Registration extends AppCompatActivity {
         /////////////////////////////////////////////////
         mDbHelper = new StudentDbHelper(this);
 
+        // == resets the text color after errors ==
+
         meTAFN.setOnFocusChangeListener((v,c)->{
             meTAFN.setTextColor(Color.BLACK);
             meTAFN.setText("");
