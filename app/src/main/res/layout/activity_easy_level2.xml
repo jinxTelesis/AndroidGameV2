@@ -9,11 +9,12 @@
 
     <LinearLayout
 
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/sand"
+        android:background="@color/bluemenu"
+
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,11 +24,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <Button
-            android:id="@+id/stage2button1"
+            android:id="@+id/stage1button1"
 
             android:layout_width="36dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="4dp"
+
+
 
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,11 +43,12 @@
 
 
         <Button
-            android:id="@+id/stage2button2"
+            android:id="@+id/stage1button2"
 
             android:layout_width="34dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
 
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,11 +59,12 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/stage2button3"
+            android:id="@+id/stage1button3"
 
             android:layout_width="34dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
 
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -69,27 +75,26 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/stage2button4"
+            android:id="@+id/stage1button4"
 
             android:layout_width="34dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="48dp"
+
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+
 
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.189"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            />
 
 
         <Button
-            android:id="@+id/stage2buttonUpID"
+            android:id="@+id/stage1buttonUpID"
+
 
             android:layout_width="36dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginLeft="48dp"
             android:layout_marginBottom="8dp"
 
             android:background="@drawable/arrowup"
@@ -101,7 +106,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/stage2buttonDownID"
+            android:id="@+id/stage1buttonDownID"
 
             android:layout_width="36dp"
             android:layout_height="38dp"
@@ -116,7 +121,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/stage2buttonLeftID"
+            android:id="@+id/stage1buttonLeftID"
 
             android:layout_width="36dp"
             android:layout_height="38dp"
@@ -131,7 +136,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/stage2buttonRightID"
+            android:id="@+id/stage1buttonRightID"
 
             android:layout_width="36dp"
             android:layout_height="38dp"
@@ -146,19 +151,20 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/stage2buttonExit"
+            android:id="@+id/stage1buttonExit"
             android:layout_width="60dp"
             android:layout_height="38dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="4dp"
             android:text="Exit"
             android:textSize="10sp" />
 
 
         <Button
-            android:id="@+id/stage2buttonReplay"
+            android:id="@+id/stage1buttonReplay"
             android:layout_width="60dp"
             android:layout_height="38dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="24dp"
             android:text="Replay"
             android:textSize="10sp" />
 
@@ -166,9 +172,9 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/stage2EwokID"
-        android:layout_width="29dp"
-        android:layout_height="41dp"
+        android:id="@+id/stage1ewokID"
+        android:layout_width="32dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -177,55 +183,73 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.553"
-        app:srcCompat="@drawable/ewok0000" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.523"
+        app:srcCompat="@drawable/ewok0000"
+        android:contentDescription="TODO" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="44dp"
-        android:layout_height="32dp"
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintHorizontal_bias="0.291"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.34"
-        app:srcCompat="@drawable/car1" />
+        app:layout_constraintVertical_bias="0.317"
+        app:srcCompat="@drawable/aligator"
+        android:contentDescription="TODO" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="28dp"
-        android:layout_height="29dp"
+        android:id="@+id/imageView2"
+        android:layout_width="25dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.562"
+        app:srcCompat="@drawable/fatguy"
+        android:contentDescription="TODO" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="24dp"
+        android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.786"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.627"
-        app:srcCompat="@drawable/fatguy" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.851"
+        app:srcCompat="@drawable/fatme" />
 
     <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="37dp"
-        android:layout_height="30dp"
+        android:id="@+id/imageView4"
+        android:layout_width="27dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="256dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.361"
-        app:srcCompat="@drawable/aligator" />
+        app:srcCompat="@drawable/surferkid" />
 
 </android.support.constraint.ConstraintLayout>

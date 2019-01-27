@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:layout_marginTop="308dp"
-        android:background="@drawable/sand"
+        android:background="@color/bluemenu"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
