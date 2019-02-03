@@ -15,9 +15,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.eTUnLogin)EditText username;
     @BindView(R.id.eTPaLogin2)EditText password;
 
-
+    private static final int RC_SIGN_IN = 789;
     StudentDbHelper mDbHelper;
     private int validChildLogin = 0;
     private int validAdultLogin = 0;
@@ -69,6 +72,30 @@ public class LoginActivity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer();
         mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.backgroundmusic);
         mediaPlayer.start();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        List<AuthUI.IdpConfig> provoiders = Arrays.asList(
+                new AuthUI.IdpConfig.EmailBuilder().build(),
+                new AuthUI.IdpConfig.PhoneBuilder().build(),
+                new AuthUI.IdpConfig.GoogleBuilder().build()
+        );
+
+        if(auth.getCurrentUser() != null)
+        {
+            // already signed in
+        } else{
+
+            startActivityForResult(
+                    AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(provoiders)// need provider list first
+                    .build(),
+                    RC_SIGN_IN
+            );
+            
+
+        }
 
 
         cLBtn.setOnClickListener(new View.OnClickListener() {

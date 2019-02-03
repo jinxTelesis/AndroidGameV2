@@ -378,8 +378,6 @@ public class Registration extends AppCompatActivity {
         values.put(COL_CHILD_NAME,meCFN.getText().toString()); // child name?
         values.put(COL_CHILD_USERNAME,meTCUN.getText().toString());
         values.put(COL_CHILD_PASSWORD,meTCP.getText().toString());
-
-
         long i = db.insert(TABLE_NAME, null,values);
 
     }
